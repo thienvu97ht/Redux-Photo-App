@@ -1,6 +1,8 @@
+// @ts-nocheck
 import { PHOTO_CATEGORY_OPTIONS } from "constants/global";
 import InputField from "custom-fields/InputField";
-import SelectField from "custom-fields/SelectField";
+import RandomPhotoField from "custom-fields/RandomPhotoField";
+import SelectField from "custom-fields/SelectField/index";
 import { FastField, Form, Formik } from "formik";
 import PropTypes from "prop-types";
 import React from "react";
@@ -21,7 +23,9 @@ function PhotoForm(props) {
 
   // npm i --save react-select
   return (
-    <Formik initialValues={initiaValues}>
+    <Formik
+      initialValues={initiaValues}
+      onSubmit={(values) => console.log("submit: ", values)}>
       {(formikProps) => {
         // do something here
         const { values, errors, touched } = formikProps;
@@ -42,6 +46,12 @@ function PhotoForm(props) {
               label="Category"
               placeholder="What's your photo category?"
               options={PHOTO_CATEGORY_OPTIONS}
+            />
+
+            <FastField
+              name="photo"
+              component={RandomPhotoField}
+              label="Photo"
             />
           </Form>
         );
