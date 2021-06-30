@@ -23,7 +23,8 @@ const getRandomImageUrl = () => {
 };
 
 function RandomPhoto(props) {
-  const { name, imageUrl, onImageUrlChange, onRandomButtonBlur } = props;
+  const { name, imageUrl, onImageUrlChange, onRandomButtonBlur, showError } =
+    props;
 
   const handleRandomPhotoClick = async () => {
     if (onImageUrlChange) {
@@ -33,7 +34,7 @@ function RandomPhoto(props) {
   };
 
   return (
-    <div className="random-photo">
+    <div className={showError ? "is-invalid random-photo" : "random-photo"}>
       <div className="random-photo__button">
         <Button
           outline

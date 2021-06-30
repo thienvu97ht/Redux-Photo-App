@@ -1,7 +1,9 @@
+// @ts-nocheck
 import RandomPhoto from "components/RandomPhoto/index";
+import { ErrorMessage } from "formik";
 import PropTypes from "prop-types";
 import React from "react";
-import { FormGroup, Label } from "reactstrap";
+import { FormFeedback, FormGroup, Label } from "reactstrap";
 
 RandomPhotoField.propTypes = {
   field: PropTypes.object.isRequired,
@@ -17,6 +19,8 @@ RandomPhotoField.defaultProps = {
 function RandomPhotoField(props) {
   const { field, form, label } = props;
   const { name, value, onBlur } = field;
+  const { errors, touched } = form;
+  const showError = errors[name] && touched[name];
 
   const handleImageUrlChange = (newImageUrl) => {
     form.setFieldValue(name, newImageUrl);
@@ -31,7 +35,10 @@ function RandomPhotoField(props) {
         imageUrl={value}
         onImageUrlChange={handleImageUrlChange}
         onRandomButtonBlur={onBlur}
+        showError={showError}
       />
+
+      <ErrorMessage name={name} component={FormFeedback} />
     </FormGroup>
   );
 }

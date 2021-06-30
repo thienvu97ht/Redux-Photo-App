@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import Select from "react-select";
 import { FormFeedback, FormGroup, Label } from "reactstrap";
+import "./SelectField.scss";
 
 SelectField.propTypes = {
   field: PropTypes.object.isRequired,

@@ -6,6 +6,8 @@ import SelectField from "custom-fields/SelectField/index";
 import { FastField, Form, Formik } from "formik";
 import PropTypes from "prop-types";
 import React from "react";
+import { Button, FormGroup } from "reactstrap";
+import * as Yup from "yup";
 
 PhotoForm.propTypes = {
   onSubmit: PropTypes.func,
@@ -19,12 +21,22 @@ function PhotoForm(props) {
   const initiaValues = {
     title: "",
     categoryId: null,
+    photo: "",
   };
+
+  const validationSchema = Yup.object().shape({
+    title: Yup.string().required("This field is required."),
+
+    categoryId: Yup.number().required("This field is required.").nullable(),
+
+    photo: Yup.string().required("This field is required."),
+  });
 
   // npm i --save react-select
   return (
     <Formik
       initialValues={initiaValues}
+      validationSchema={validationSchema}
       onSubmit={(values) => console.log("submit: ", values)}>
       {(formikProps) => {
         // do something here
@@ -53,6 +65,10 @@ function PhotoForm(props) {
               component={RandomPhotoField}
               label="Photo"
             />
+
+            <FormGroup>
+              <Button type="submit">Add to album</Button>
+            </FormGroup>
           </Form>
         );
       }}
