@@ -58,7 +58,7 @@ function App() {
         }
 
         // console.log("Logged in user: ", user.displayName);
-        const token = await user.getIdToken();
+        // const token = await user.getIdToken();
         // console.log("Logged in user token: ", token);
         localStorage.setItem(
           "firebaseui::rememberedAccounts",
