@@ -17,6 +17,7 @@ MainPage.defaultProps = {
 
 function MainPage(props) {
   const photos = useSelector((state) => state.photos);
+
   console.log(photos);
 
   return (
