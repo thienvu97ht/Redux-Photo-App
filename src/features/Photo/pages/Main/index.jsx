@@ -3,7 +3,6 @@ import Banner from "components/Banner/index";
 import Images from "constants/images";
 import PropTypes from "prop-types";
 import React from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Container } from "reactstrap";
 
@@ -16,9 +15,7 @@ MainPage.defaultProps = {
 };
 
 function MainPage(props) {
-  const photos = useSelector((state) => state.photos);
-
-  console.log(photos);
+  // const photos = useSelector((state) => state.photos);
 
   return (
     <div className="photo-main">
