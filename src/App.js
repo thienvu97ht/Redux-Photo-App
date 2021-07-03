@@ -1,10 +1,14 @@
+// @ts-nocheck
+import { unwrapResult } from "@reduxjs/toolkit";
 import productApi from "api/productApi";
+import { getMe } from "app/userSlice";
 import Header from "components/Header/index";
 import NotFound from "components/NotFound/index";
 import SignIn from "features/Auth/pages/SignIn";
 import firebase from "firebase/app";
 import "firebase/auth";
 import React, { Suspense, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -27,6 +31,7 @@ const Photo = React.lazy(() => import("./features/Photo"));
 
 function App() {
   const [productList, setProductList] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchProductList = async () => {
@@ -55,6 +60,17 @@ function App() {
           // user logs our
           console.log("User is not logged in");
           return;
+        }
+
+        // Get me when signed in
+        try {
+          const action = getMe();
+          const actionResult = await dispatch(action);
+          const currentUser = unwrapResult(actionResult);
+          console.log(currentUser);
+        } catch (error) {
+          console.log("Faild to login: ", error.message);
+          // show toast error
         }
 
         // console.log("Logged in user: ", user.displayName);
